@@ -10,8 +10,7 @@ class DbHelper {
     String dbPath = await getDatabasesPath();
     String path = join(dbPath, "Expense.db");
 
-    database =
-        await openDatabase(path, version: 1, onCreate: (db, version) async {
+    database = await openDatabase(path, version: 1, onCreate: (db, version) async {
       await db.execute(
           "create table Expense(roll text primary key,expenseName text not null,amount text,date text)");
       print("create table");
@@ -25,7 +24,7 @@ class DbHelper {
   }
 
   static Future<List<ExpenseInfo>> getExpense() async {
-    if (database != null) {
+   if (database != null) {
       List<ExpenseInfo> expenseInfoList = [];
       List<Map<String, dynamic>> listExpense =
           await database.rawQuery("select * from Expense");
@@ -36,5 +35,8 @@ class DbHelper {
       return expenseInfoList;
     }
     return [];
+  }
+  static Future delete(String? roll)async{
+   await database.rawDelete("delete from student where roll=?",[roll]);
   }
 }

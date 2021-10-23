@@ -41,6 +41,7 @@ class _ViewPageState extends State<ViewPage> {
               onLongPress: (){
                 setState(() {
                   expenseInfoList.indexOf(expenseInfoList[index]);
+                  DbHelper.delete(expenseInfo.roll);
                   expenseInfoList.removeAt(index);
                 });
               },
